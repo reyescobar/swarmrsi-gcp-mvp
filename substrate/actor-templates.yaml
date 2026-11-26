@@ -1,0 +1,119 @@
+# =============================================================================
+# Agent Substrate v1.0.1 ActorTemplates & Per-Lease EgressPolicy
+# Apply via: kubectl ate create actor-template -f ...
+# =============================================================================
+
+# --- [A] Primary Hardware MicroVM Template (pi-mono default, Hermes swap-in) ---
+metadata:
+  atespace: swarm-mvp
+  name: swarm-pimono-runner-v1
+workerSelector:
+  matchLabels:
+    pool: swarm-microvm
+containers:
+  - name: runner
+    image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/swarmrsi-local/pimono-guest@${PIMONO_IMAGE_DIGEST}
+    env:
+      - {name: PORT, value: "80"}
+      - {name: RUNNER_HARNESS, value: "pi-mono"}
+      - {name: BROKER_BASE_URL, value: "http://broker.harness.svc.cluster.local:8080"}
+      - {name: ACTOR_INFO_DIR, value: "/run/ate/info"}
+      - {name: WORKSPACE_ROOT, value: "/workspace"}
+    wakeupProbe:
+      httpGet:
+        path: /health
+        port: 80
+      timeoutSeconds: 120
+    volumeMounts:
+      - {name: workspace, mountPath: /workspace}
+      - {name: actorinfo, mountPath: /run/ate/info}
+resources:
+  limits:
+    cpuMillicores: 2000
+    memoryBytes: 4294967296
+snapshotConfig:
+  preferredFidelity: SNAPSHOT_FIDELITY_MEMORY
+volumes:
+  - name: workspace
+    durableDir: {}
+  - name: actorinfo
+    systemInfo:
+      dataSources:
+        - actorMetadata:
+            items:
+              - {field: ACTOR_METADATA_FIELD_NAME, path: actor-name}
+              - {field: ACTOR_METADATA_FIELD_ATESPACE, path: atespace}
+              - {field: ACTOR_METADATA_FIELD_UID, path: actor-uid}
+---
+# --- [B] Day-1 Zero-Quota gVisor Twin (identical image digest, targets swarm-gvisor) ---
+metadata:
+  atespace: swarm-mvp
+  name: swarm-pimono-runner-gv-v1
+workerSelector:
+  matchLabels:
+    pool: swarm-gvisor
+containers:
+  - name: runner
+    image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/swarmrsi-local/pimono-guest@${PIMONO_IMAGE_DIGEST}
+    env:
+      - {name: PORT, value: "80"}
+      - {name: RUNNER_HARNESS, value: "pi-mono"}
+      - {name: BROKER_BASE_URL, value: "http://broker.harness.svc.cluster.local:8080"}
+      - {name: ACTOR_INFO_DIR, value: "/run/ate/info"}
+      - {name: WORKSPACE_ROOT, value: "/workspace"}
+    wakeupProbe:
+      httpGet:
+        path: /health
+        port: 80
+      timeoutSeconds: 120
+    volumeMounts:
+      - {name: workspace, mountPath: /workspace}
+      - {name: actorinfo, mountPath: /run/ate/info}
+resources:
+  limits:
+    cpuMillicores: 2000
+    memoryBytes: 4294967296
+snapshotConfig:
+  preferredFidelity: SNAPSHOT_FIDELITY_MEMORY
+volumes:
+  - name: workspace
+    durableDir: {}
+  - name: actorinfo
+    systemInfo:
+      dataSources:
+        - actorMetadata:
+            items:
+              - {field: ACTOR_METADATA_FIELD_NAME, path: actor-name}
+              - {field: ACTOR_METADATA_FIELD_ATESPACE, path: atespace}
+              - {field: ACTOR_METADATA_FIELD_UID, path: actor-uid}
+---
+# --- [C] Harbor Cold Docker Gate MicroVM Template (Dedicated Guest Kernel + dockerd) ---
+metadata:
+  atespace: swarm-mvp
+  name: swarm-harbor-eval-v1
+workerSelector:
+  matchLabels:
+    pool: swarm-microvm
+containers:
+  - name: harbor-runner
+    image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/swarmrsi-local/harbor-microvm@${HARBOR_IMAGE_DIGEST}
+    env:
+      - {name: PORT, value: "80"}
+      - {name: BROKER_BASE_URL, value: "http://broker.harness.svc.cluster.local:8080"}
+      - {name: DOCKER_HOST, value: "unix:///var/run/docker.sock"}
+    wakeupProbe:
+      httpGet:
+        path: /health
+        port: 80
+      timeoutSeconds: 120
+    volumeMounts:
+      - {name: workspace, mountPath: /workspace}
+resources:
+  limits:
+    cpuMillicores: 4000
+    memoryBytes: 17179869184
+snapshotConfig:
+  preferredFidelity: SNAPSHOT_FIDELITY_ROOTFS
+volumes:
+  - name: workspace
+    durableDir: {}

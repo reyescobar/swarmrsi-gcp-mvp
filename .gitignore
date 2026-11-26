@@ -1,0 +1,24 @@
+# Terraform & Cloud artifacts
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!terraform.tfvars.example
+override.tf
+override.tf.json
+
+# Python & Node
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+dist/
+.pytest_cache/
+
+# Runtime & scratch outputs
+runs/
+harbor-cold-report/
+*.tar.zst
+*.patch
+.env

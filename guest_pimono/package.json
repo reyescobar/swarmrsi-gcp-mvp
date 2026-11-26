@@ -1,0 +1,10 @@
+{
+  "name": "swarmrsi-pimono-guest",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Harness-agnostic Agent Substrate microVM guest appliance running pi-mono (@mariozechner/pi-coding-agent)",
+  "dependencies": {
+    "@mariozechner/pi-coding-agent": "^0.52.0"
+  }
+}

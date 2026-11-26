@@ -1,0 +1,25 @@
+name: "graph-signal-denoising-4slice"
+stop_mode: "DUAL"                 # Halt fleet on target_utility >= 0.75 OR continue hill-climbing
+target_utility: 0.75
+token_budget_limit: 12000000
+worker_concurrency: 4
+network_target_mode: "NONE"       # Keyless Broker only; 0 external internet access
+
+editable_surface:
+  allowed_edit_globs:
+    - "src/*.py"
+  target_py_relpath: "src/denoiser.py"
+  entrypoint_symbol: "recover_signal"
+  smoke_cmd: "python3 smoke_check.py"
+
+subtask_slices:
+  - "slice_sparse_dropout"        # 45% missing zeroed sensors
+  - "slice_dense_manifold"        # Smooth multi-hop diffusion manifold
+  - "slice_outlier_burst"         # 10% +/-15-sigma corrupted spike sensors
+  - "slice_latency_bound"         # 180-node graph runtime efficiency check
+
+repo_forbidden_tokens:
+  - "src/denoiser.py"
+  - "recover_signal"
+  - "slice_sparse_dropout"
+  - "slice_outlier_burst"

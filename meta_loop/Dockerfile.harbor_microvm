@@ -1,0 +1,14 @@
+FROM docker:27-dind
+
+# Runs inside Agent Substrate `ateworker-microvm` (Cloud Hypervisor v53 dedicated guest kernel),
+# providing isolated guest-local `dockerd` for Harbor task Dockerfiles with ZERO privileged DinD on GKE!
+RUN apk add --no-cache python3 py3-pip git bash curl nodejs npm \
+  && pip3 install --break-system-packages uv harbor \
+  && npm install -g @mariozechner/pi-coding-agent
+
+WORKDIR /opt/meta
+COPY meta_loop/ /opt/meta/meta_loop/
+COPY guest_pimono/extensions/ /opt/meta/meta_loop/harness_bundle_v1/extensions/
+
+EXPOSE 80
+CMD ["/bin/bash", "/opt/meta/meta_loop/harbor_microvm_entrypoint.sh"]

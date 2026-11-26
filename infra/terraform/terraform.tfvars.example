@@ -1,0 +1,18 @@
+project_id               = "your-gcp-project-id"
+region                   = "us-central1"
+zone                     = "us-central1-c"
+name_prefix              = "swarmrsi"
+
+# Day-1 Tip:
+# - Keep `true` once regional `C3-CPUS-per-project-region >= 216` quota is approved (autoscales 0 -> 1 -> 0).
+# - Flip to `false` to boot the entire MVP immediately on standard VMs via Agent Substrate gVisor (`ateworker-gvisor`).
+enable_baremetal_microvm = true
+baremetal_machine_type   = "c3-highcpu-192-metal"
+
+# Zonal 4-vCPU AlloyDB keeps Central Memory & Graph G_t live at ~$0.62/hr
+enable_alloydb_ha        = false
+alloydb_cpu_count        = 4
+
+worker_concurrency       = 4
+worker_model             = "gemini-3.5-flash"
+observer_model           = "gemma-3-27b-it"

@@ -1,0 +1,56 @@
+sources:
+  swarm-alloydb-ro:
+    kind: "postgres"
+    host: "${ALLOYDB_HOST}"
+    port: 5432
+    database: "postgres"
+    user: "swarm_sandbox_ro"
+    password: "${SWARM_SANDBOX_RO_PASSWORD}"
+
+tools:
+  pull-stall-summary:
+    kind: postgres-sql
+    source: swarm-alloydb-ro
+    description: "Fetch peer threads' rolling summaries and recent verified failures/findings when local attempts stall."
+    parameters:
+      - name: campaign_id
+        type: string
+        description: "Active campaign UUID."
+      - name: exclude_root_hypothesis_id
+        type: string
+        description: "Caller's own root hypothesis UUID."
+    statement: |
+      SELECT t.title,
+             t.rolling_summary,
+             COALESCE(
+               (SELECT jsonb_agg(jsonb_build_object('kind', e.entry_kind, 'badge', e.audit_badge, 'body', e.body))
+                  FROM (
+                    SELECT entry_kind, audit_badge, body
+                      FROM swarm.blackboard_entries e
+                     WHERE e.thread_id = t.thread_id
+                       AND e.moderation_state IN ('PUBLISHED_IMMEDIATE', 'PUBLISHED_MODERATED')
+                     ORDER BY e.created_at DESC
+                     LIMIT 4
+                  ) e),
+               '[]'::jsonb
+             ) AS recent_entries
+        FROM swarm.blackboard_threads t
+       WHERE t.campaign_id = $1::uuid
+         AND t.root_hypothesis_id <> $2::uuid
+       ORDER BY t.updated_at DESC
+       LIMIT 6;
+
+  list-active-goal-facts:
+    kind: postgres-sql
+    source: swarm-alloydb-ro
+    description: "List distilled challenge-specific invariants stored in Goal Memory."
+    parameters:
+      - name: campaign_id
+        type: string
+        description: "Active campaign UUID."
+    statement: |
+      SELECT fact_statement, round_distilled
+        FROM swarm.goal_memory
+       WHERE campaign_id = $1::uuid AND is_active = true
+       ORDER BY round_distilled DESC, created_at DESC
+       LIMIT 20;

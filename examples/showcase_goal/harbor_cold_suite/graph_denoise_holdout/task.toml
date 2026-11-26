@@ -1,0 +1,18 @@
+version = "1.0"
+
+[metadata]
+title = "Cold Holdout Graph Signal Recovery (Anti-Self-Confirmation Gate)"
+difficulty = "medium"
+tags = ["swarmrsi", "cold-gate", "signal-processing"]
+
+[verifier]
+timeout_sec = 60
+
+[agent]
+timeout_sec = 900
+
+[environment]
+build_timeout_sec = 300
+cpus = 2
+memory_mb = 2048
+allow_internet = false

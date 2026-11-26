@@ -1,0 +1,11 @@
+[loop]
+max_local_attempts = 4
+local_stagnation_patience = 1
+ucb_rho = 0.90
+ucb_beta = 0.50
+ucb_gamma = 0.25
+speculation_quota_per_round = 1
+
+[substrate]
+runner = "pi-mono"
+model_provider = "swarm-broker"
