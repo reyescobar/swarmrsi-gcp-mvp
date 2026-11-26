@@ -1,3 +1,5 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """Deterministic 4-Gate Cascade Verifier (BOM-09 — Zero LLM).
 
 Executes strictly outside the worker model:

@@ -1,3 +1,5 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """Harbor Cold Single-Shot Agent Adapter & Anti-Self-Confirmation Promotion Gate.
 
 Pairs `google-research/harness2` (Ring 2 generator) with `harbor-framework/harbor`

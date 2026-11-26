@@ -1,3 +1,6 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
+
 # Custom-mode VPC with Private Google Access + Cloud NAT + Private Services Access (AlloyDB)
 resource "google_compute_network" "vpc" {
   name                    = "${var.name_prefix}-vpc"

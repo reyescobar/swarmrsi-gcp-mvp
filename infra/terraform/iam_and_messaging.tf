@@ -1,3 +1,6 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
+
 # Least-Privilege IAM + Workload Identity + Cloud Tasks + Pub/Sub + Verifier Job (BOM-07..BOM-09)
 
 # 1. Dedicated GKE Node Service Account (avoids empty default compute SA permissions)

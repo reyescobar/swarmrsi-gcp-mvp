@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """Air-gapped 4-Slice Sealed Evaluator (mounted ONLY inside Verifier, never in worker VMs)."""
 from __future__ import annotations
 

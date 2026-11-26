@@ -1,3 +1,6 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
+
 # Unified AlloyDB for PostgreSQL 17 + AlloyDB AI (BOM-05)
 resource "random_password" "alloydb_admin" {
   length  = 24

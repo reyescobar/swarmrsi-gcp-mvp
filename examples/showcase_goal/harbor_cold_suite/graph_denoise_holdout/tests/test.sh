@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 # Sealed Harbor post-exit verifier: runs ONLY after agent exits and writes /logs/verifier/reward.txt
 set -euo pipefail
 mkdir -p /logs/verifier

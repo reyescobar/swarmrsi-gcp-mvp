@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 
 echo "=== [Ring 2 -> Ring 3] Harness2 Meta-Discovery + Cold Harbor (--n-samples 1) Gate ==="

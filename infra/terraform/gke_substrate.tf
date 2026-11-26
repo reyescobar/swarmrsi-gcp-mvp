@@ -1,3 +1,6 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
+
 # GKE Standard 1.37+ Private Cluster + Dual Agent Substrate Pools (BOM-01 & BOM-02)
 resource "google_container_cluster" "primary" {
   name                     = "${var.name_prefix}-gke"

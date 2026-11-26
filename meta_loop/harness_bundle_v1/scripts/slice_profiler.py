@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """Standalone CLI helper inside /opt/swarm/bundle/scripts (evolved by Harness2)."""
 import json
 import sys

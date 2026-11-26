@@ -1,3 +1,6 @@
+-- Copyright 2026 Google LLC
+-- SPDX-License-Identifier: Apache-2.0
+
 -- =============================================================================
 -- SwarmRSI + Gemma Observer + Harness2/Harbor Schema for AlloyDB PostgreSQL 17
 -- Extensions: vector, alloydb_scann (mode='AUTO'), google_ml_integration

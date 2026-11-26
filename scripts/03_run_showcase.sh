@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 
 # Runs an end-to-end local simulation of the 4-slice SwarmRSI campaign + 4-Gate Verifier +

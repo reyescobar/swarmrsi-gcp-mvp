@@ -1,3 +1,5 @@
+// Copyright 2026 Google LLC
+// SPDX-License-Identifier: Apache-2.0
 // /opt/swarm/extensions/swarm-guardrail.ts — Deterministic OODA Guardrail Hook for pi-mono
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 import { execFileSync } from "node:child_process";

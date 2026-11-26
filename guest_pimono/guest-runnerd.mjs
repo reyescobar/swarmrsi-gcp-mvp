@@ -1,3 +1,5 @@
+// Copyright 2026 Google LLC
+// SPDX-License-Identifier: Apache-2.0
 // /opt/swarm/guest-runnerd.mjs — PID 1 HTTP wrapper inside Agent Substrate microVM (:80)
 import http from "node:http";
 import { spawn, execFileSync } from "node:child_process";

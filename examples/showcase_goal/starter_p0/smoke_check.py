@@ -1,3 +1,5 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """Fast (<1s) local smoke test run inside the microVM during pi-mono's 4-attempt OODA loop."""
 import math
 from src.denoiser import recover_signal

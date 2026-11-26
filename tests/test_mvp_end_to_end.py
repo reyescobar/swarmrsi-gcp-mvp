@@ -1,3 +1,5 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """End-to-End Offline Verification Suite for SwarmRSI + pi-mono + Harness2 + Harbor MVP."""
 from __future__ import annotations
 

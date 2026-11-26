@@ -1,3 +1,5 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """Starter program p_0 for the 4-slice Graph Signal Denoising showcase.
 
 Baseline aggregate utility u(p_0) ~= 0.44 (Target >= 0.80).

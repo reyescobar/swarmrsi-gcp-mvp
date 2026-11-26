@@ -1,3 +1,5 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """SwarmRSI Discounted-UCB Scheduler, Donor Selector & Prefix-Cached Brief Renderer.
 
 Implements Algorithm 1, Eq. (5)-(10), and Table 5 of arXiv:2610.20431v3 without

@@ -1,3 +1,6 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
+
 output "gke_cluster_name" {
   value = google_container_cluster.primary.name
 }

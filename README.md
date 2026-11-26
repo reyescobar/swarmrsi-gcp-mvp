@@ -1,6 +1,18 @@
 # SwarmRSI + `pi-mono` + `Harness²` + `Harbor` on Google Cloud (GA MVP)
 
-Minimal, production-grounded reference repository implementing the **Three-Ring SwarmRSI Architecture** on **100% Generally Available (GA) Google Cloud services** with harness-agnostic **`pi-mono`** (`@mariozechner/pi-coding-agent`, interchangeable with **`Hermes`**):
+Minimal, production-grounded reference repository implementing the **Three-Ring SwarmRSI Architecture** on **100% Generally Available (GA) Google Cloud services** with harness-agnostic **`pi-mono`** (`@mariozechner/pi-coding-agent`, interchangeable with **`Hermes`**).
+
+> **Full 5-Section Architecture Specification & Implementation BOM:** [`docs/ARCHITECTURE_AND_BOM.md`](docs/ARCHITECTURE_AND_BOM.md)
+
+![Fig 1 — SwarmRSI Reference Diagram on 100% GA Google Cloud Components](docs/images/swarm_rsi_gcp_fig1_diagram.png)
+
+![Fig 2 — Component-by-Component GA Mapping, Harness² + Harbor & Horizon Reference](docs/images/swarm_rsi_gcp_fig2_mapping.png)
+
+![Fig 3 — Outer Meta-Harness Evolution & Cold Validation Gate (Harness² -> Harbor on Agent Substrate)](docs/images/swarm_rsi_gcp_fig3_meta_harness.png)
+
+---
+
+## Three-Ring Architecture Summary
 
 1. **Ring 1 — Online SwarmRSI Evolution (`control_plane/`, `verifier/`, `guest_pimono/`, `sql/`):**
    - **AlloyDB for PostgreSQL 17 + ScaNN** stores the Central Hypothesis Bank (`FOR UPDATE SKIP LOCKED` leases), Threaded Blackboard (`finding`, `failure`, `hypothesis` with anti-convergence moderation), Program Frontier $F_P$, and Two-Tier Central Memory (`Goal` + `General` Maxims ranked by `wilson_lower_bound(hit_count, attempt_count)`).
@@ -56,6 +68,7 @@ make window-close
 
 | Directory | Contents |
 | :--- | :--- |
+| `docs/` | Full 5-section architecture & BOM (`ARCHITECTURE_AND_BOM.md`) + `Fig 1`, `Fig 2`, and `Fig 3` diagrams. |
 | `infra/terraform/` | Flat Terraform root module (`apis.tf`, `network.tf`, `storage_and_ar.tf`, `alloydb.tf`, `gke_substrate.tf`, `iam_and_messaging.tf`). |
 | `sql/` | `001_swarm_schema.sql` (`PG 17` + `alloydb_scann` + `swarm.harness_bundles`) & `mcp_tools.yaml` (`readOnly: true`). |
 | `substrate/` | `workerpools.yaml` (`microVM` + `gVisor` + `control-plane`) and `actor-templates.yaml` (`pi-mono` + `harbor-eval-v1`). |
@@ -66,3 +79,7 @@ make window-close
 | `examples/showcase_goal/` | Turnkey 4-slice Python denoising challenge (`GOAL.yaml`, `starter_p0/`, `sealed_eval/`, and `harbor_cold_suite/`). |
 | `scripts/` | Bootstrap, image digest pinning, showcase runner, `$0/hr` bare-metal window close, and clean `500 GiB` PD teardown. |
 | `tests/` | `test_mvp_end_to_end.py` verifying every gate, scheduler formula, and anti-self-confirmation check offline. |
+
+## License
+
+Apache License 2.0 — see [`LICENSE`](LICENSE).

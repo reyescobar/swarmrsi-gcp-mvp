@@ -1,3 +1,5 @@
+# Copyright 2026 Google LLC
+# SPDX-License-Identifier: Apache-2.0
 """Cross-Family Gemma 3 Batch Observer & Deterministic Phase-3 Maxim Write Gate."""
 from __future__ import annotations
 
